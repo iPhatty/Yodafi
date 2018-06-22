@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // Css
 import "./style/style.css";
-// React Redux components
+// React components
 import App from './components/app';
 
 ReactDOM.render(
