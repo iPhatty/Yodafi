@@ -8,4 +8,4 @@ import App from './components/app';
 
 ReactDOM.render(
     <App />
-  , document.querySelector('.root'));
+  , document.getElementById('root'));
