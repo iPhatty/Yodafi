@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import { hot } from 'react-hot-loader';
 
-export default class App extends Component {
-
+class App extends Component {
   render() {
-    return (
-      <div>iPhatty React</div>
-    );
+    return <div>iPhatty React</div>;
   }
 }
+
+export default hot(module)(App);
