@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
+import { getQuote } from '../actions';
 
 const StyledForm = styled.form`
   margin-top: 5rem;
@@ -25,6 +28,7 @@ class Form extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
+    this.props.getQuote(this.state.searchTerm);
   };
   handleChange = e => {
     this.setState({
@@ -48,4 +52,10 @@ class Form extends Component {
   }
 }
 
-export default Form;
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ getQuote }, dispatch);
+};
+export default connect(
+  null,
+  mapDispatchToProps
+)(Form);

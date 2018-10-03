@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 const Result = props => {
-  return <div>{props.result}</div>;
+  const { result } = props;
+  return (
+    <div>
+      {result.contents === undefined ? 'search!' : result.contents.translated}
+    </div>
+  );
 };
 
 const mapStateToProps = state => {
