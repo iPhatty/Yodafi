@@ -2,10 +2,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // Css
-import "./style/style.css";
+import './style/style.css';
 // React components
+import Root from './Root';
 import App from './components/app';
 
 ReactDOM.render(
+  <Root>
     <App />
-  , document.getElementById('root'));
+  </Root>,
+  document.getElementById('root')
+);
