@@ -3,6 +3,7 @@ import { hot } from 'react-hot-loader';
 import styled from 'styled-components';
 
 import Form from './form';
+import Result from './result';
 
 const Title = styled.h1`
   font-size: 1.5rem;
@@ -15,6 +16,7 @@ class App extends Component {
       <React.Fragment>
         <Title>Yodafi</Title>
         <Form />
+        <Result />
       </React.Fragment>
     );
   }
