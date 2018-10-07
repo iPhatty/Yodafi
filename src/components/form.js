@@ -1,34 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import styled from 'styled-components';
 import { getQuote } from '../actions';
-
-const StyledForm = styled.form`
-  margin-top: 5rem;
-  display: flex;
-  justify-content: center;
-`;
-
-const StyledInput = styled.input`
-  font-size: 1rem;
-  padding: 0.2rem;
-  border: none;
-  border-radius: 5px;
-`;
-
-const StyledButton = styled.button`
-  background-color: #1d1d1d;
-  color: #efefef;
-`;
 
 class Form extends Component {
   state = {
-    searchTerm: ''
+    searchTerm: '',
+    loading: false
   };
   handleSubmit = e => {
     e.preventDefault();
-    this.props.getQuote(this.state.searchTerm);
+    const { searchTerm } = this.state;
+    this.setState({ loading: true });
+    const url = `https://cors-anywhere.herokuapp.com/https://api.funtranslations.com/translate/yoda.json?text=${searchTerm}`;
+    fetch(url)
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        const data = JSON.parse(JSON.stringify(json));
+        this.props.getQuote(data.contents.translated);
+        this.setState({ loading: false });
+      })
+      .catch(error => {
+        const errMsg = 'Something went wrong, please try again later';
+        this.props.getQuote(errMsg);
+        this.setState({ loading: false });
+      });
   };
   handleChange = e => {
     this.setState({
@@ -38,16 +36,20 @@ class Form extends Component {
 
   render() {
     return (
-      <StyledForm onSubmit={this.handleSubmit}>
-        <StyledInput
+      <form className="form" onSubmit={this.handleSubmit}>
+        <input
+          className="input"
           type="text"
           placeholder="May the force be with you..."
           name="searchTerm"
           value={this.state.searchTerm}
           onChange={this.handleChange}
+          autoComplete="off"
         />
-        <StyledButton type="submit">Submit</StyledButton>
-      </StyledForm>
+        <button className="button" type="submit" disabled={this.state.loading}>
+          {this.state.loading ? 'Loading' : 'Submit'}
+        </button>
+      </form>
     );
   }
 }

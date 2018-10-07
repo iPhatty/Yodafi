@@ -1,13 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
-const Result = props => {
-  const { result } = props;
-  return (
-    <div>
-      {result.contents === undefined ? 'search!' : result.contents.translated}
-    </div>
-  );
+const Result = ({ result }) => {
+  return <div>{result}</div>;
 };
 
 const mapStateToProps = state => {
