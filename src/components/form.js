@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { getQuote } from '../actions';
 
 class Form extends Component {
@@ -8,26 +7,13 @@ class Form extends Component {
     searchTerm: '',
     loading: false
   };
+
   handleSubmit = e => {
     e.preventDefault();
     const { searchTerm } = this.state;
-    this.setState({ loading: true });
-    const url = `https://cors-anywhere.herokuapp.com/https://api.funtranslations.com/translate/yoda.json?text=${searchTerm}`;
-    fetch(url)
-      .then(response => {
-        return response.json();
-      })
-      .then(json => {
-        const data = JSON.parse(JSON.stringify(json));
-        this.props.getQuote(data.contents.translated);
-        this.setState({ loading: false });
-      })
-      .catch(error => {
-        const errMsg = 'Something went wrong, please try again later';
-        this.props.getQuote(errMsg);
-        this.setState({ loading: false });
-      });
+    this.props.getQuote(searchTerm);
   };
+
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -55,8 +41,11 @@ class Form extends Component {
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getQuote }, dispatch);
+  return {
+    getQuote: searchTerm => dispatch(getQuote(searchTerm))
+  }
 };
+
 export default connect(
   null,
   mapDispatchToProps

@@ -3,12 +3,13 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reduxPromise from 'redux-promise';
+import thunk from 'redux-thunk';
 
 import reducers from './reducers';
 
 const Root = props => {
   return (
-    <Provider store={createStore(reducers, {}, applyMiddleware(reduxPromise))}>
+    <Provider store={createStore(reducers, {}, applyMiddleware(thunk))}>
       {props.children}
     </Provider>
   );

@@ -7,21 +7,21 @@ const ResultMsg = posed.span({
   hidden: { opacity: 0 }
 });
 
-const Result = ({ result }) => {
+const Result = ({ quote }) => {
   return (
     <div className="result result--container">
       <ResultMsg
         className="result--content"
-        pose={result.length > 0 ? 'visible' : 'hidden'}
+        pose={quote.length > 0 ? 'visible' : 'hidden'}
       >
-        {result}
+        {quote}
       </ResultMsg>
     </div>
   );
 };
 
 const mapStateToProps = state => {
-  return { result: state.yodaQuote };
+  return { quote: state.yodaQuote.quote };
 };
 
 export default connect(

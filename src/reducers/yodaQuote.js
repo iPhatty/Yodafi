@@ -1,9 +1,16 @@
-import { GETNEWQUOTE } from '../actions/types';
+import { GETNEWQUOTE, LOADINGQUOTE } from '../actions/types';
 
-export default (state = '', action) => {
+const initialState = {
+  quote: '',
+  loading: false
+}
+
+export default (state = initialState, action) => {
   switch (action.type) {
     case GETNEWQUOTE:
-      return action.payload;
+      return {...state, quote: action.payload}
+    case LOADINGQUOTE:
+      return {...state, loading: action.payload}
     default:
       return state;
   }

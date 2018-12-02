@@ -1,1 +1,3 @@
 export const GETNEWQUOTE = 'GETNEWQUOTE';
+export const LOADINGQUOTE = 'LOADINGQUOTE';
+export const STOREQUOTE = 'STOREQUOTE';
