@@ -1,8 +1,9 @@
 {
-  "presets": ["env", "react"],
+  "presets": ["@babel/preset-env", "@babel/preset-react"],
   "plugins": [
-    "transform-class-properties",
+    "@babel/plugin-proposal-class-properties",
     "react-hot-loader/babel",
-    "styled-components"
+    "styled-components",
+    "@babel/plugin-proposal-object-rest-spread"
   ]
 }
